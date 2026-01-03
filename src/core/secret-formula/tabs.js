@@ -496,5 +496,22 @@ export const tabs = [
         hidable: true
       }
     ]
+  },
+   {
+    key: "destruction",
+    name: "Destruction",
+    hideAt: 1.9,
+    id: 11,
+    hidable: true,
+    subtabs: [
+      {
+        key: "universal",
+        name: "Universal",
+        symbol: "<i class='fas fa-trophy'></i>",
+        component: "UniversalTab",
+        id: 0,
+        hidable: true,
+      },
+    ]
   }
 ];

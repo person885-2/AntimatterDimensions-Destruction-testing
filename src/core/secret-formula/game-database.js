@@ -20,6 +20,7 @@ import { sidebarResources } from "./sidebar-resources";
 import { speedrunMilestones } from "./speedrun-milestones";
 import { tabNotifications } from "./tab-notifications";
 import { tabs } from "./tabs";
+import { destructionUpgradesUniversal } from "./universal-upgrades";
 
 export const GameDatabase = {
   achievements,
@@ -30,6 +31,7 @@ export const GameDatabase = {
   changelog,
   confirmationTypes,
   credits,
+  destructionUpgradesUniversal,
   discordRichPresence,
   eternity,
   h2p,

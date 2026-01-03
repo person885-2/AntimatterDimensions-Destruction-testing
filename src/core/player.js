@@ -380,6 +380,9 @@ window.player = {
     galaxies: 0,
     galCost: DC.E170,
   },
+  destruction: {
+    fracturedUniverses: 0
+  },
   timestudy: {
     theorem: DC.D0,
     maxTheorem: DC.D0,
