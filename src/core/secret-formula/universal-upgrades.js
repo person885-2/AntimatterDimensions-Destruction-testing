@@ -1,4 +1,6 @@
 import { DC } from "../constants";
+import { NormalChallenge } from "../normal-challenges";
+import { UniversalUpgrade } from "../universal-upgrades";
 export const destructionUpgradesUniversal = [
   {
     name: "The destruction begins",
@@ -11,21 +13,20 @@ export const destructionUpgradesUniversal = [
     canLock: false,
     lockEvent: "None",
     description: "x10 Antimatter Dimensions mults, x3 Infinity Points, and x3 infinities",
-    effect: () => 1 + Replicanti.galaxies.total / 50,
-    formatEffect: value => formatX(value, 2, 2)
+    effect: () => 1,
   },
   {
     name: "The endless torment",
     id: 2,
     cost: 1,
     requirement: "Reach infinity without sacrificing",
-    hasFailed: () => !(player.sacrificed <= 1),
-    checkRequirement: () => player.sacrificed <= 1,
+    hasFailed: () => !(player.sacrificed.eq(1)),
+    checkRequirement: () => player.sacrificed.eq(1),
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     canLock: true,
     lockEvent: "sacrifice",
-    description: "",
-    effect: () => Decimal.add(1, Decimal.log10(player.records.totalAntimatter)),
+    description: "multiply antimatter dimensions based on total antimatter",
+    effect: () => UniversalUpgrade(6).isBought ? Decimal.add(1, Decimal.log10(player.records.totalAntimatter)): Decimal.add(1, Decimal.sqrt(Decimal.log10(player.records.totalAntimatter))),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -39,7 +40,7 @@ export const destructionUpgradesUniversal = [
     canLock: true,
     lockEvent: "gain another dimension boost",
     description: "Dimension boost multiplier is multiplied based on total antimatter",
-    effect: () => Math.sqrt(Math.log2(Decimal.log10(player.records.totalAntimatter))),
+    effect: () => UniversalUpgrade(7).isBought ? Math.log2(Decimal.log10(player.records.totalAntimatter)) : Math.sqrt(Math.log2(Decimal.log10(player.records.totalAntimatter))),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -49,71 +50,61 @@ export const destructionUpgradesUniversal = [
     requirement: () => `Reach infinity without galaxies`,
     hasFailed: () => {!player.galaxies<=0},
     checkRequirement: () => player.galaxies<=0,
-    checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
+    checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     canLock: true,
-    // There are two locking events - equipping a glyph with too low a level, and equipping a second glyph
+    lockEvent: "gain an antimatter galaxy",
     description: "Increase galaxy strength by 25%",
+    effect: () => 0.25
+  },
+  {
+    name: "The destruction advances",
+    id: 5,
+    cost: 2,
+    requirement: () => `Have all other universal upgrades`,
+    hasFailed: () => !((player.universal.upgradeBits | 239)==player.universal.upgradeBits),
+    checkRequirement: () => (player.universal.upgradeBits | 239)==player.universal.upgradeBits,
+    checkEvent: GAME_EVENT.UNIVERSAL_UPGRADE_BOUGHT,
+    canLock: false,
+    description: () => `x10 ip, x2 dimboost strength, +50% galaxy strength`,
     effect: () => 1
   },
   {
-    name: "Existentially Prolong",
-    id: 5,
-    cost: 15,
-    requirement: () => `Complete your first manual Eternity with at least ${formatPostBreak(DC.E400)} Infinity Points`,
-    hasFailed: () => !player.requirementChecks.reality.noEternities,
-    checkRequirement: () => Currency.infinityPoints.exponent >= 400 &&
-      player.requirementChecks.reality.noEternities,
-    checkEvent: GAME_EVENT.ETERNITY_RESET_BEFORE,
-    canLock: true,
-    lockEvent: "Eternity",
-    bypassLock: () => Currency.infinityPoints.exponent >= 400,
-    description: () => `Start every Reality with ${formatInt(100)} Eternities (also applies to current Reality)`,
-    automatorPoints: 15,
-    shortDescription: () => `Start with ${formatInt(100)} Eternities`,
-    effect: () => 100
-  },
-  {
-    name: "The Boundless Flow",
+    name: "The unending agony",
     id: 6,
-    cost: 50,
-    requirement: () => `${format(Currency.infinitiesBanked.value, 2)}/${format(DC.E12)} Banked Infinities`,
-    checkRequirement: () => Currency.infinitiesBanked.exponent >= 12,
-    checkEvent: [GAME_EVENT.ETERNITY_RESET_AFTER, GAME_EVENT.REALITY_FIRST_UNLOCKED],
-    description: "Every second, gain 10% of the Infinities you would normally gain by Infinitying",
+    cost: 2,
+    requirement: () => `the endless torment purchased and beating c8 without sacrificing`,
+    hasFailed: () => !(player.sacrificed.eq(1)),
+    checkRequirement: () => NormalChallenge(8).isRunning && player.sacrificed.eq(0) && UniversalUpgrade(2).isBought,
+    checkEvent: [GAME_EVENT.BIG_CRUNCH_BEFORE],
+    description: "square the endless torment",
     automatorPoints: 5,
     shortDescription: () => `Continuous Infinity generation`,
-    effect: () => gainedInfinities().times(0.1),
-    formatEffect: value => `${format(value)} per second`
+    effect: () => 1,
   },
   {
-    name: "The Knowing Existence",
+    name: "Purified infinity",
     id: 7,
-    cost: 50,
-    requirement: () => `Eternity for ${format(DC.E70)} Eternity Points without completing Eternity Challenge 1`,
-    hasFailed: () => EternityChallenge(1).completions !== 0,
-    checkRequirement: () => Currency.eternityPoints.exponent >= 70 && EternityChallenge(1).completions === 0,
-    checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
+    cost: 2,
+    requirement: () => `the finite infinity purchased and reaching infinity with 0 dimboosts`,
+    hasFailed: () => player.dimensionBoosts>1,
+    checkRequirement: () => player.dimensionBoosts==0 && UniversalUpgrade(3).isBought,
+    checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     canLock: true,
-    lockEvent: "complete Eternity Challenge 1",
-    description: "Eternity Point multiplier based on Reality and Time Theorem count",
-    effect: () => Currency.timeTheorems.value
-      .minus(DC.E3).clampMin(2)
-      .pow(Math.log2(Math.min(Currency.realities.value, 1e4))).clampMin(1),
-    formatEffect: value => formatX(value, 2, 2)
+    lockEvent: "gain another dimboost",
+    description: "square the finite infinity",
+    effect: () => 1,
   },
   {
-    name: "The Telemechanical Process",
+    name: "Thermodynamic Equilibrium",
     id: 8,
-    cost: 50,
-    requirement: () => `Eternity for ${format(DC.E4000)} Eternity Points without Time Dim. 5-8`,
-    hasFailed: () => !Array.range(5, 4).every(i => TimeDimension(i).amount.equals(0)),
-    checkRequirement: () => Currency.eternityPoints.exponent >= 4000 &&
-      Array.range(5, 4).every(i => TimeDimension(i).amount.equals(0)),
-    checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
+    cost: 2,
+    requirement: () => `beat NC6 with 0 galaxies and heat death purchased`,
+    hasFailed: () => !player.galaxies==0,
+    checkRequirement: () => player.galaxies==0&&
+      NormalChallenge(6).isRunning && UniversalUpgrade(4).isBought,
+    checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     canLock: true,
-    lockEvent: "purchase a Time Dimension above the 4th TD",
-    description: () => `Improve Eternity Autobuyer and unlock autobuyers for Time Dimensions and ${formatX(5)} EP`,
-    automatorPoints: 10,
-    shortDescription: () => `TD and ${formatX(5)} EP Autobuyers, improved Eternity Autobuyer`,
+    lockEvent: "gain an antimatter galaxy",
+    description: () => `buff heat death to 50%`,
   }
 ];

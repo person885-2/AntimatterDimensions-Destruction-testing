@@ -88,9 +88,9 @@ class UniversalUpgradeState extends BitPurchasableMechanicState {
     this.hasPlayerLock = false;
   }
 
- // onPurchased() {
-   // EventHub.dispatch(GAME_EVENT.UNIVERSAL_UPGRADE_BOUGHT);
-//}
+  onPurchased() {
+    EventHub.dispatch(GAME_EVENT.UNIVERSAL_UPGRADE_BOUGHT);
+}
 }
 UniversalUpgradeState.index = mapGameData(
   GameDatabase.destructionUpgradesUniversal,
