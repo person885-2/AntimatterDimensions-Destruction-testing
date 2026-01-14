@@ -3,7 +3,7 @@ import { NormalChallenge } from "../normal-challenges";
 import { UniversalUpgrade } from "../universal-upgrades";
 export const destructionUpgradesUniversal = [
   {
-    name: "The destruction begins",
+    name: "The Destruction Begins",
     id: 1,
     cost: 1,
     requirement: "Reach infinity",
