@@ -10,6 +10,7 @@ import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
 
 import Payments from "./core/payments";
+import { UniversalUpgrade } from "./core/universal-upgrades";
 
 if (GlobalErrorHandler.handled) {
   throw new Error("Initialization failed");
@@ -280,7 +281,8 @@ export function gainedInfinities() {
     RealityUpgrade(7),
     Achievement(131).effects.infinitiesGain,
     Achievement(164),
-    Ra.unlocks.continuousTTBoost.effects.infinity
+    Ra.unlocks.continuousTTBoost.effects.infinity,
+    UniversalUpgrade(1)
   );
   infGain = infGain.times(getAdjustedGlyphEffect("infinityinfmult"));
   infGain = infGain.powEffectOf(SingularityMilestone.infinitiedPow);

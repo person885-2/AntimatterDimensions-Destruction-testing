@@ -1,4 +1,5 @@
 import { DC } from "./constants";
+import { UniversalUpgrade } from "./universal-upgrades";
 
 export function effectiveBaseGalaxies() {
   // Note that this already includes the "50% more" active path effect
@@ -33,7 +34,9 @@ export function getTickSpeedMultiplier() {
     Achievement(178),
     InfinityChallenge(5).reward,
     PelleUpgrade.galaxyPower,
-    PelleRifts.decay.milestones[1]
+    PelleRifts.decay.milestones[1],
+    UniversalUpgrade(4),
+    UniversalUpgrade(8)
   );
   if (galaxies < 3) {
     // Magic numbers are to retain balancing from before while displaying
@@ -46,7 +49,7 @@ export function getTickSpeedMultiplier() {
       if (player.galaxies === 1) baseMultiplier = 1 / 1.07632;
       if (player.galaxies === 2) baseMultiplier = 1 / 1.072;
     }
-    const perGalaxy = 0.02 * effects;
+    const perGalaxy = 0.02 * effects * UniversalUpgrade(5).isBought ? 1.5 : 1;
     if (Pelle.isDoomed) galaxies *= 0.5;
 
     galaxies *= Pelle.specialGlyphEffect.power;

@@ -11,7 +11,7 @@ export const destructionUpgradesUniversal = [
     canLock: false,
     lockEvent: "None",
     description: "x10 Antimatter Dimensions mults, x3 Infinity Points, and x3 infinities",
-    effect: () => 1,
+    effect: () => 3,
   },
   {
     name: "The endless torment",
@@ -52,7 +52,7 @@ export const destructionUpgradesUniversal = [
     canLock: true,
     lockEvent: "gain an antimatter galaxy",
     description: "Increase galaxy strength by 25%",
-    effect: () => 0.25
+    effect: () => 1.25
   },
   {
     name: "The destruction advances",
@@ -63,8 +63,8 @@ export const destructionUpgradesUniversal = [
     checkRequirement: () => (player.universal.upgradeBits | 239)==player.universal.upgradeBits,
     checkEvent: GAME_EVENT.UNIVERSAL_UPGRADE_BOUGHT,
     canLock: false,
-    description: () => `x10 ip, x2 dimboost strength, +50% galaxy strength`,
-    effect: () => 1
+    description: () => `x10 ip, x2 dimboost strength, +50% galaxy strength, ^1.01 antimatter dimension mults`,
+    effect: () => 10
   },
   {
     name: "The unending agony",
@@ -76,7 +76,7 @@ export const destructionUpgradesUniversal = [
     checkEvent: [GAME_EVENT.BIG_CRUNCH_BEFORE],
     description: "square the endless torment",
     automatorPoints: 5,
-    shortDescription: () => `Continuous Infinity generation`,
+    shortDescription: () => `Square the endless torment`,
     effect: () => 1,
   },
   {
@@ -103,6 +103,7 @@ export const destructionUpgradesUniversal = [
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     canLock: true,
     lockEvent: "gain an antimatter galaxy",
-    description: () => `buff heat death to 50%`,
+    description: () => `another 25% galaxy strength boost`,
+    effect: () => 1.25
   }
 ];

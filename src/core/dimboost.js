@@ -1,4 +1,5 @@
 import { DC } from "./constants";
+import { UniversalUpgrade } from "./universal-upgrades";
 
 class DimBoostRequirement {
   constructor(tier, amount) {
@@ -32,8 +33,9 @@ export class DimBoost {
         Achievement(117),
         Achievement(142),
         GlyphEffect.dimBoostPower,
-        PelleRifts.recursion.milestones[0]
-      ).powEffectsOf(InfinityUpgrade.dimboostMult.chargedEffect);
+        PelleRifts.recursion.milestones[0],
+        UniversalUpgrade(3)
+      ).times(UniversalUpgrade(5).isBought ? 2 : 1).powEffectsOf(InfinityUpgrade.dimboostMult.chargedEffect);
     if (GlyphAlteration.isAdded("effarig")) boost = boost.pow(getSecondaryGlyphEffect("effarigforgotten"));
     return boost;
   }

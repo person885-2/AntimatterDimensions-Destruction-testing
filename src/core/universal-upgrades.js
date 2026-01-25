@@ -81,7 +81,7 @@ class UniversalUpgradeState extends BitPurchasableMechanicState {
   }
 
   tryUnlock() {
-    const infinityReached = PlayerProgress.isInfinityUnlocked();
+    const infinityReached = PlayerProgress.infinityUnlocked;
     if (!infinityReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.universal.upgReqs |= (1 << this.id);
     GameUI.notify.reality(`You've unlocked a Universal Upgrade: ${this.config.name}`);

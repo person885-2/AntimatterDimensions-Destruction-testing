@@ -477,7 +477,7 @@ Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
     player.celestials.pelle.galaxyGenerator.spentGalaxies += spent;
   }
 }();
-Currency.fracturedUniverses = new class extends NumberCurrency {
+Currency.fracturedUniverses = new class extends DecimalCurrency {
   get value() {
     return player.destruction.fracturedUniverses;
   }

@@ -381,7 +381,7 @@ window.player = {
     galCost: DC.E170,
   },
   destruction: {
-    fracturedUniverses: 0
+    fracturedUniverses: new Decimal(0)
   },
   timestudy: {
     theorem: DC.D0,

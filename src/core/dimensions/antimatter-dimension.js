@@ -1,5 +1,5 @@
 import { DC } from "../constants";
-import { Achievement } from "../globals";
+import { Achievement, UniversalUpgrade } from "../globals";
 
 import { DimensionState } from "./dimension";
 
@@ -42,7 +42,8 @@ export function antimatterDimensionCommonMultiplier() {
     InfinityChallenge(8),
     EternityChallenge(10),
     AlchemyResource.dimensionality,
-    PelleUpgrade.antimatterDimensionMult
+    PelleUpgrade.antimatterDimensionMult,
+    UniversalUpgrade(2)
   );
 
   multiplier = multiplier.dividedByEffectOf(InfinityChallenge(6));
@@ -67,6 +68,8 @@ export function getDimensionFinalMultiplierUncached(tier) {
 
   multiplier = applyNDMultipliers(multiplier, tier);
   multiplier = applyNDPowers(multiplier, tier);
+
+ 
 
   const glyphDilationPowMultiplier = getAdjustedGlyphEffect("dilationpow");
   if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
@@ -144,7 +147,7 @@ function applyNDMultipliers(mult, tier) {
   if (Achievement(43).isUnlocked) {
     multiplier = multiplier.times(1 + tier / 100);
   }
-
+multiplier.times(UniversalUpgrade(1).isBought ? 10 : 1)
   multiplier = multiplier.clampMin(1);
 
   return multiplier;
@@ -181,7 +184,7 @@ function applyNDPowers(mult, tier) {
   if (PelleStrikes.infinity.hasStrike) {
     multiplier = multiplier.pow(0.5);
   }
-
+ multiplier.pow(UniversalUpgrade(5).isBought ? 1.01 : 1)
 
   return multiplier;
 }

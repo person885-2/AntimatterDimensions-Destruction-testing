@@ -508,7 +508,7 @@ export const tabs = [
         key: "universal",
         name: "Universal",
         symbol: "<i class='fas fa-trophy'></i>",
-        component: "UniversalTab",
+        component: "UniversalUpgradesTab",
         id: 0,
         hidable: true,
       },
