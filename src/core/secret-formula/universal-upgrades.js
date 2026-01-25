@@ -1,6 +1,4 @@
 import { DC } from "../constants";
-import { NormalChallenge } from "../normal-challenges";
-import { UniversalUpgrade } from "../universal-upgrades";
 export const destructionUpgradesUniversal = [
   {
     name: "The Destruction Begins",
