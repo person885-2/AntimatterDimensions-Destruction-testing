@@ -75,7 +75,6 @@ export const destructionUpgradesUniversal = [
     checkRequirement: () => NormalChallenge(8).isRunning && player.sacrificed.eq(0) && UniversalUpgrade(2).isBought,
     checkEvent: [GAME_EVENT.BIG_CRUNCH_BEFORE],
     description: "square the endless torment",
-    automatorPoints: 5,
     shortDescription: () => `Square the endless torment`,
     effect: () => 1,
   },
