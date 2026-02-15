@@ -100,7 +100,8 @@ class NormalChallengeState extends GameMechanicState {
     previousComp = player.challenge.normal.completedBits
     player.challenge.normal.completedBits |= 1 << this.id;
     if(player.challenge.normal.completedBits = previousComp){
-      player.universal.fracturedUniverses = player.universal.fracturedUniverses.add(1)
+      player.universal.fracturedUniverses = player.universal.fracturedUniverses.add(1);
+    }
     // Since breaking infinity maxes even autobuyers that aren't unlocked,
     // it's possible to get r52 or r53 from completing a challenge
     // and thus unlocking an autobuyer.
