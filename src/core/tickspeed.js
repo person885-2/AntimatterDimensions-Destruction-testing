@@ -38,6 +38,7 @@ export function getTickSpeedMultiplier() {
     UniversalUpgrade(4),
     UniversalUpgrade(8)
   );
+  effects *= UniversalUpgrade(5).isBought ? 1.5 : 1;
   if (galaxies < 3) {
     // Magic numbers are to retain balancing from before while displaying
     // them now as positive multipliers rather than negative percentages
@@ -49,7 +50,7 @@ export function getTickSpeedMultiplier() {
       if (player.galaxies === 1) baseMultiplier = 1 / 1.07632;
       if (player.galaxies === 2) baseMultiplier = 1 / 1.072;
     }
-    const perGalaxy = 0.02 * effects * UniversalUpgrade(5).isBought ? 1.5 : 1;
+    const perGalaxy = 0.02 * effects;
     if (Pelle.isDoomed) galaxies *= 0.5;
 
     galaxies *= Pelle.specialGlyphEffect.power;
