@@ -74,6 +74,8 @@ export const destructionUpgradesUniversal = [
     hasFailed: () => !(player.sacrificed.eq(0)),
     checkRequirement: () => NormalChallenge(8).isRunning && player.sacrificed.eq(0) && UniversalUpgrade(2).isBought,
     checkEvent: [GAME_EVENT.BIG_CRUNCH_BEFORE],
+    canLock: true,
+    lockEvent: "sacrifice",
     description: "square the endless torment",
     shortDescription: () => `Square the endless torment`,
     effect: () => 1,
