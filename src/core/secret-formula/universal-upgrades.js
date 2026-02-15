@@ -4,7 +4,7 @@ export const destructionUpgradesUniversal = [
     name: "The Destruction Begins",
     id: 1,
     cost: 1,
-    requirement: "Reach infinity",
+    requirement: "Reach Infinity",
     hasFailed: () => !(player.infinities.gte(1)),
     checkRequirement: () => player.infinities.gte(1),
     checkEvent: GAME_EVENT.BIG_CRUNCH_AFTER,
