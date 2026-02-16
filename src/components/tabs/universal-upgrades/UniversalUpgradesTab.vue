@@ -8,7 +8,7 @@ export default {
   },
   data() {
     return {
-    frUn: new Decimal();
+    frUn: new Decimal(),
   };
     },
   computed: {
