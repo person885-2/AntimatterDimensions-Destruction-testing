@@ -6,7 +6,7 @@ export default {
   components: {
     RealityUpgradeButton
   },
-  data() : {
+  data() {
     return {
     frUn: new Decimal();
   };
