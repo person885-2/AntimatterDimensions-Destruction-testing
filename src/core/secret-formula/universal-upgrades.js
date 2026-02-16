@@ -63,7 +63,7 @@ export const destructionUpgradesUniversal = [
     checkRequirement: () => (player.universal.upgradeBits | 478)==player.universal.upgradeBits,
     checkEvent: GAME_EVENT.UNIVERSAL_UPGRADE_BOUGHT,
     canLock: false,
-    description: () => `x10 ip, x2 dimboost strength, +50% galaxy strength, ^1.01 antimatter dimension mults`,
+    description: () => `x10 ip, x2 dimboost strength, +50% galaxy strength, ^1.01 antimatter dimension mults, and unlock achievement 43`,
     effect: () => 10
   },
   {
