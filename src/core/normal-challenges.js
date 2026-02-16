@@ -97,7 +97,7 @@ class NormalChallengeState extends GameMechanicState {
   }
 
   complete() {
-    previousComp = player.challenge.normal.completedBits;
+    let previousComp = player.challenge.normal.completedBits;
     player.challenge.normal.completedBits |= 1 << this.id;
     if(player.challenge.normal.completedBits = previousComp){
       player.universal.fracturedUniverses = player.universal.fracturedUniverses.add(1);
