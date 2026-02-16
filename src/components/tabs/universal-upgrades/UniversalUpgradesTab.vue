@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     update() {
-      this.frUn = Currency.fracturedUniverses;
+      this.frUn = Currency.fracturedUniverses.mantissa *(Math.pow(10, Currency.fracturedUniverses.exponent);
     },
     id(row, column) {
       return (row - 1) * 4 + column - 1;
