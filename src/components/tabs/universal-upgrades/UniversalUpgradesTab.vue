@@ -6,6 +6,11 @@ export default {
   components: {
     RealityUpgradeButton
   },
+  data() {
+    return {
+    frUn: new Decimal(),
+  };
+    },
   computed: {
     upgrades: () => UniversalUpgrades.all,
     costScalingTooltip: () => `Prices start increasing faster above ${format(1e30)} RM and then even faster
@@ -16,6 +21,9 @@ export default {
       unlocked the upgrade.`,
   },
   methods: {
+    update() {
+      this.frUn.copyFrom(player.destruction.fracturedUniverses);
+    },
     id(row, column) {
       return (row - 1) * 4 + column - 1;
     }
@@ -25,24 +33,8 @@ export default {
 
 <template>
   <div class="l-reality-upgrade-grid">
-    <div class="c-reality-upgrade-infotext">
-      Mouseover <i class="fas fa-question-circle" /> icons for additional information.
-      All upgrades are single purchase and also have requirements which, once completed, permanently unlock the ability
-      to purchase the upgrades at any point.
-      <span :ach-tooltip="possibleTooltip">
-        <i class="fas fa-question-circle" />
-      </span>
-      <br>
-      Locked upgrades show their requirement and effect by default; unlocked ones show
-      their effect, current bonus, and cost. Hold shift to swap this behavior.
-      <br>
-      You can shift-click upgrades with <i class="fas fa-lock-open" /> to make the game prevent you
-      from doing anything this infinity which would cause you to fail their unlock condition.
-      <span :ach-tooltip="lockTooltip">
-        <i class="fas fa-question-circle" />
-      </span>
-      <br>
-    </div>
+    <div> you have {{ format(frUn) }} Fractured Universes.</div>
+    <br>
     <div
       v-for="row in 2"
       :key="row"

@@ -147,7 +147,7 @@ function applyNDMultipliers(mult, tier) {
   if (Achievement(43).isUnlocked) {
     multiplier = multiplier.times(1 + tier / 100);
   }
-multiplier.times(UniversalUpgrade(1).isBought ? 10 : 1)
+multiplier = multiplier.times(UniversalUpgrade(1).isBought ? 10 : 1)
   multiplier = multiplier.clampMin(1);
 
   return multiplier;
@@ -184,7 +184,7 @@ function applyNDPowers(mult, tier) {
   if (PelleStrikes.infinity.hasStrike) {
     multiplier = multiplier.pow(0.5);
   }
- multiplier.pow(UniversalUpgrade(5).isBought ? 1.01 : 1)
+multiplier = multiplier.pow(UniversalUpgrade(5).isBought ? 1.01 : 1)
 
   return multiplier;
 }
